@@ -1,7 +1,7 @@
 # antd-file-manager
 
 ``` bash
-# install dependencies
+# install
 npm install ant-file-manager
 ```
 
