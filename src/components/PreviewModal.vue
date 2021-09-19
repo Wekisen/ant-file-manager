@@ -1,0 +1,52 @@
+<template>
+    <a-modal
+        :visible="previewVisible"
+        :footer="null"
+        :centered="true"
+        @cancel="() => { $emit('cancel') }"
+    >
+        <img v-if="previewType === 'image'" style="width: 100%" :src="previewUrl" />
+        <video v-else-if="previewType === 'video'" :src="previewUrl" width="100%" controls></video>
+        <div v-else style="text-align:center;padding: 40px 0">
+            <a-icon type="frown" theme="twoTone" :style="{ 'font-size': '30px', 'margin-bottom': '10px' }" />
+            <div style="color:#aaa;margin-bottom:5px;"><small>{{ previewUrl }}</small></div>
+            <div>不支持预览的文件类型：<span :style="{ 'font-weight': 'bold' }">{{ previewUrl.split('.')[previewUrl.split('.').length - 1] }}</span></div>
+            <div v-if="uploadTime" style="font-size:13px;color:#aaa;margin-top:5px;">上传时间：{{ uploadTime }}</div>
+        </div>
+    </a-modal>
+</template>
+
+<script>
+export default {
+    name: 'PreviewModal',
+    props: {
+        previewVisible: {
+            type: Boolean,
+            required: true
+        },
+        previewType: {
+            type: String,
+            default: () => 'image'
+        },
+        previewUrl: {
+            type: String,
+            required: true
+        },
+        uploadTime: {
+            type: String
+        }
+    },
+    mounted () {
+    },
+    data () {
+        return {
+        }
+    },
+    methods: {
+    }
+}
+</script>
+
+<style scoped>
+
+</style>
