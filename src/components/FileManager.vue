@@ -220,17 +220,16 @@ export default {
     methods: {
         getFileList () {
             this.loading = true
-            this.$axios.get(this.config.getApi,
-                {
+            this.$axios.get(this.config.getApi, {
+                params: {
                     types: this.types,
                     pageSize: this.pageSize,
                     pageNo: this.currentPage
-                }, {
-                    headers: {
-                        Authorization: storage.get(ACCESS_TOKEN)
-                    }
+                },
+                headers: {
+                    Authorization: storage.get('Authorization')
                 }
-            ).then(res => {
+            }).then(res => {
                 this.files = res.data.result.data
                 this.totalCount = res.data.result.totalCount
                 this.loading = false
@@ -280,7 +279,7 @@ export default {
             this.$axios.post(this.config.saveApi, params, {
                 headers: { 
                     'Content-Type': 'multipart/form-data',
-                    Authorization: storage.get(ACCESS_TOKEN)
+                    Authorization: storage.get('Authorization')
                 }
             }).then(res => {
                 console.log(res);
@@ -312,7 +311,7 @@ export default {
             })
             this.$axios.post(this.config.deleteApi, { ids: ids }, {
                 headers: {
-                    Authorization: storage.get(ACCESS_TOKEN)
+                    Authorization: storage.get('Authorization')
                 }
             }).then(res => {
                 this.getFileList()
