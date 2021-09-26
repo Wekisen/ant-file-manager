@@ -130,6 +130,7 @@
 <script>
 import PreviewModal from './PreviewModal'
 import { VueCropper } from 'vue-cropper'
+import storage from 'store'
 
 export default {
     name: 'FileManager',
@@ -219,13 +220,17 @@ export default {
     methods: {
         getFileList () {
             this.loading = true
-            this.$axios.get(this.config.getApi, {
-                params: {
+            this.$axios.get(this.config.getApi,
+                {
                     types: this.types,
                     pageSize: this.pageSize,
                     pageNo: this.currentPage
+                }, {
+                    headers: {
+                        Authorization: storage.get(ACCESS_TOKEN)
+                    }
                 }
-            }).then(res => {
+            ).then(res => {
                 this.files = res.data.result.data
                 this.totalCount = res.data.result.totalCount
                 this.loading = false
@@ -273,7 +278,10 @@ export default {
             const params = new FormData()
             params.append('files[]', file)
             this.$axios.post(this.config.saveApi, params, {
-                headers: { 'Content-Type': 'multipart/form-data' }
+                headers: { 
+                    'Content-Type': 'multipart/form-data',
+                    Authorization: storage.get(ACCESS_TOKEN)
+                }
             }).then(res => {
                 console.log(res);
                 if (res.status === 200) {
@@ -302,7 +310,11 @@ export default {
             this.selected.forEach(item => {
                 ids.push(this.files[item].id)
             })
-            this.$axios.post(this.config.deleteApi, { ids: ids }).then(res => {
+            this.$axios.post(this.config.deleteApi, { ids: ids }, {
+                headers: {
+                    Authorization: storage.get(ACCESS_TOKEN)
+                }
+            }).then(res => {
                 this.getFileList()
                 this.selected = []
                 this.$message.success(res.data.message)
