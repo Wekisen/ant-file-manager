@@ -24,10 +24,10 @@
             <div v-show="files.length === 0" style="padding: 20px 0;"><a-empty /></div>
             <div v-show="files.length > 0" class="select-wrapper">
                 <div class="left-wrapper">
-                    <span>选中：{{ selected.length }} / {{ files.length }}</span>
-                    <a href="javascript:;" v-show="selecting && selected.length !== files.length" @click="selectAll">全选</a>
-                    <a href="javascript:;" v-show="!selecting" @click="() => { selecting = true }">选择</a>
-                    <a href="javascript:;" v-show="selecting" @click="() => { selected = []; selecting = false }">取消</a>
+                    <span>Selected：{{ selected.length }} / {{ files.length }}</span>
+                    <a href="javascript:;" v-show="selecting && selected.length !== files.length" @click="selectAll">All</a>
+                    <a href="javascript:;" v-show="!selecting" @click="() => { selecting = true }">Select</a>
+                    <a href="javascript:;" v-show="selecting" @click="() => { selected = []; selecting = false }">Cancel</a>
                 </div>
                 <div v-show="selected.length > 0" class="right-wrapper">
                     <a-popconfirm
@@ -37,7 +37,7 @@
                         cancel-text="No"
                         @confirm="handleDelete"
                     >
-                        <a href="javascript:;" class="icon-item" style="color:red"><a-icon type="delete" style="margin-right:3px" />删除</a>
+                        <a href="javascript:;" class="icon-item" style="color:red"><a-icon type="delete" style="margin-right:3px" />Delete</a>
                     </a-popconfirm>
                 </div>
             </div>
@@ -83,7 +83,7 @@
         </template>
 
         <a-modal
-            title="裁剪"
+            title="Crop"
             :visible="cropperVisible"
             :maskClosable="false"
             :confirmLoading="confirmLoading"
@@ -264,7 +264,7 @@ export default {
         },
         uploadFile (data) {
             if (JSON.stringify(this.uploading) === '{}' || !this.uploading) {
-                this.uploading = this.$message.loading('上传中...请勿关闭窗口', 0)
+                this.uploading = this.$message.loading('uploading ...', 0)
             }
             this.cropLoading = true
             if (this.crop) {
@@ -282,8 +282,8 @@ export default {
                     Authorization: storage.get('Authorization')
                 }
             }).then(res => {
-                console.log(res);
                 if (res.status === 200) {
+                    this.uploading()
                     this.getFileList()
                     this.$message.config({ maxCount: 1 })
                     this.$message.success(res.data.message)
@@ -298,9 +298,9 @@ export default {
                     }
                 }
             }).catch(err => {
+                this.uploading()
                 this.$message.error(err.message)
             }).finally(() => {
-                this.uploading()
                 this.cropLoading = false
             })
         },
@@ -393,7 +393,7 @@ export default {
             setTimeout(() => {
                 vm.confirmLoading = false
                 vm.close()
-                vm.$message.success('上傳成功')
+                vm.$message.success('Success')
             }, 2000)
         },
         pageChange (page, pageSize) {

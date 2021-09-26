@@ -64,7 +64,7 @@ export default {
         },
         title: {
             type: String,
-            default: () => '图片/视频'
+            default: () => 'Image/Video'
         },
         files: {
             type: Array,

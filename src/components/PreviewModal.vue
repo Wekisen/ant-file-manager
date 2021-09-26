@@ -10,8 +10,8 @@
         <div v-else style="text-align:center;padding: 40px 0">
             <a-icon type="frown" theme="twoTone" :style="{ 'font-size': '30px', 'margin-bottom': '10px' }" />
             <div style="color:#aaa;margin-bottom:5px;"><small>{{ previewUrl }}</small></div>
-            <div>不支持预览的文件类型：<span :style="{ 'font-weight': 'bold' }">{{ previewUrl.split('.')[previewUrl.split('.').length - 1] }}</span></div>
-            <div v-if="uploadTime" style="font-size:13px;color:#aaa;margin-top:5px;">上传时间：{{ uploadTime }}</div>
+            <div>File types that do not support preview: <span :style="{ 'font-weight': 'bold' }">{{ previewUrl.split('.')[previewUrl.split('.').length - 1] }}</span></div>
+            <div v-if="uploadTime" style="font-size:13px;color:#aaa;margin-top:5px;">Upload At: {{ uploadTime }}</div>
         </div>
     </a-modal>
 </template>
