@@ -135,6 +135,7 @@ export default {
         },
         managerClose () {
             this.managerVisible = false
+            this.$emit('cancel')
         }
     }
 }
