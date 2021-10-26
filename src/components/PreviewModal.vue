@@ -9,7 +9,7 @@
         <video v-else-if="previewType === 'video'" :src="previewUrl" width="100%" controls></video>
         <div v-else style="text-align:center;padding: 40px 0">
             <a-icon type="frown" theme="twoTone" :style="{ 'font-size': '30px', 'margin-bottom': '10px' }" />
-            <div style="color:#aaa;margin-bottom:5px;"><small>{{ previewUrl }}</small></div>
+            <div style="margin-bottom:5px;"><small><a :href="previewUrl" target="_blank" style="color:#aaa;">{{ previewUrl }}</a></small></div>
             <div>File types that do not support preview: <span :style="{ 'font-weight': 'bold' }">{{ previewUrl.split('.')[previewUrl.split('.').length - 1] }}</span></div>
             <div v-if="uploadTime" style="font-size:13px;color:#aaa;margin-top:5px;">Upload At: {{ uploadTime }}</div>
         </div>
