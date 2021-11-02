@@ -7,7 +7,7 @@
     >
         <img v-if="previewType === 'image'" style="width: 100%" :src="previewUrl" />
         <video v-else-if="previewType === 'video'" :src="previewUrl" width="100%" controls></video>
-        <embed v-else-if="previewUrl.split('.')[previewUrl.split('.').length - 1].toLowerCase() === 'pdf'" :src="previewUrl" type="application/pdf" width="100%">
+        <embed v-else-if="previewUrl.split('.')[previewUrl.split('.').length - 1].toLowerCase() === 'pdf'" :src="previewUrl" type="application/pdf" width="100%" height="800">
         <div v-else style="text-align:center;padding: 40px 0">
             <a-icon type="frown" theme="twoTone" :style="{ 'font-size': '30px', 'margin-bottom': '10px' }" />
             <div style="margin-bottom:5px;"><small><a :href="previewUrl" target="_blank" style="color:#aaa;">{{ previewUrl }}</a></small></div>
