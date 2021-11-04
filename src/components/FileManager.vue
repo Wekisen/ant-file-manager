@@ -234,7 +234,7 @@ export default {
                 this.totalCount = res.data.result.totalCount
                 this.loading = false
             }).catch(err => {
-                this.$message.error(err.message)
+                this.$message.error(err.response.data.message)
             })
         },
         closePreview () {
@@ -277,7 +277,7 @@ export default {
             const params = new FormData()
             params.append('files[]', file)
             this.$axios.post(this.config.saveApi, params, {
-                headers: { 
+                headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: storage.get('Authorization')
                 }
@@ -299,7 +299,7 @@ export default {
                 }
             }).catch(err => {
                 this.uploading()
-                this.$message.error(err.message)
+                this.$message.error(err.response.data.message)
             }).finally(() => {
                 this.cropLoading = false
             })
