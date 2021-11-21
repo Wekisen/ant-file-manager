@@ -18,7 +18,7 @@
                     @change="handleUpload"
                 >
                     <p class="ant-upload-drag-icon"><a-icon type="inbox" /></p>
-                    <p class="ant-upload-text">點擊上傳或拖拽文件至此</p>
+                    <p class="ant-upload-text">點擊上傳或將文件拖拽至此</p>
                 </a-upload-dragger>
             </div>
             <div v-show="files.length === 0" style="padding: 20px 0;"><a-empty /></div>
