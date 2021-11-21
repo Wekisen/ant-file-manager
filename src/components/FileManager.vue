@@ -18,26 +18,26 @@
                     @change="handleUpload"
                 >
                     <p class="ant-upload-drag-icon"><a-icon type="inbox" /></p>
-                    <p class="ant-upload-text">Click or drag file to this area to upload</p>
+                    <p class="ant-upload-text">點擊上傳或拖拽文件至此</p>
                 </a-upload-dragger>
             </div>
             <div v-show="files.length === 0" style="padding: 20px 0;"><a-empty /></div>
             <div v-show="files.length > 0" class="select-wrapper">
                 <div class="left-wrapper">
-                    <span>Selected：{{ selected.length }} / {{ files.length }}</span>
-                    <a href="javascript:;" v-show="selecting && selected.length !== files.length" @click="selectAll">All</a>
-                    <a href="javascript:;" v-show="!selecting" @click="() => { selecting = true }">Select</a>
-                    <a href="javascript:;" v-show="selecting" @click="() => { selected = []; selecting = false }">Cancel</a>
+                    <span>已選：{{ selected.length }} / {{ files.length }}</span>
+                    <a href="javascript:;" v-show="selecting && selected.length !== files.length" @click="selectAll">所有</a>
+                    <a href="javascript:;" v-show="!selecting" @click="() => { selecting = true }">選擇</a>
+                    <a href="javascript:;" v-show="selecting" @click="() => { selected = []; selecting = false }">取消</a>
                 </div>
                 <div v-show="selected.length > 0" class="right-wrapper">
                     <a-popconfirm
                         v-show="selecting"
-                        title="Are you sure delete these files?"
-                        ok-text="Yes"
-                        cancel-text="No"
+                        title="你確定刪除這些文件?"
+                        ok-text="是"
+                        cancel-text="否"
                         @confirm="handleDelete"
                     >
-                        <a href="javascript:;" class="icon-item" style="color:red"><a-icon type="delete" style="margin-right:3px" />Delete</a>
+                        <a href="javascript:;" class="icon-item" style="color:red"><a-icon type="delete" style="margin-right:3px" />刪除</a>
                     </a-popconfirm>
                 </div>
             </div>
@@ -78,7 +78,7 @@
         </a-spin>
         <template slot="footer">
             <template>
-                <a-button key="submit" type="primary" :disabled="!selecting || selected.length === 0" @click="selectFiles">确认选择</a-button>
+                <a-button key="submit" type="primary" :disabled="!selecting || selected.length === 0" @click="selectFiles">確認選擇</a-button>
             </template>
         </template>
 
@@ -119,7 +119,7 @@
                     <a-button icon="redo" @click="rotateRight" :loading="cropLoading" />
                 </a-col>
                 <a-col :lg="{span: 2, offset: 6}" :md="2">
-                    <a-button type="primary" @click="finish('blob')" :loading="cropLoading">OK</a-button>
+                    <a-button type="primary" @click="finish('blob')" :loading="cropLoading">確認</a-button>
                 </a-col>
             </a-row>
         </a-modal>
@@ -264,7 +264,7 @@ export default {
         },
         uploadFile (data) {
             if (JSON.stringify(this.uploading) === '{}' || !this.uploading) {
-                this.uploading = this.$message.loading('uploading ...', 0)
+                this.uploading = this.$message.loading('上傳中 ...', 0)
             }
             this.cropLoading = true
             if (this.crop) {
